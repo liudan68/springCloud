@@ -1,0 +1,17 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+  cloud:
+    consul:
+      host: 192.168.85.130
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        tags: version=1.0
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        healthCheckInterval: 15s
+        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}/actuator/health
